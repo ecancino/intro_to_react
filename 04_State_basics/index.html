@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Intro to properties</title>
+    <title>State basics</title>
     <script src="http://fb.me/react-0.8.0.js"></script>
     <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
   </head>
@@ -10,23 +10,32 @@
     <script type="text/jsx">
       /*** @jsx React.DOM */
       var APP = React.createClass({
+        getInitialState: function() {
+          return { txt: 'this is my state txt', id: 0 };
+        },
         getDefaultProps: function() {
           return {
             txt: 'this is the default value',
             cat: 0
-          }
+          };
         },
         propTypes: {
           text: React.PropTypes.string,
           cat: React.PropTypes.number.isRequired
         },
+        updateText: function(e) {
+          this.setState({
+            txt: e.target.value
+          });
+        },
         render: function() {
           return (
             <div>
               <h1>Hello World</h1>
-              <b>{this.props.txt}, {this.props.cat}</b>
+              <p>{this.state.txt}, <b>{this.props.cat}</b></p>
+              <input type="text" onChange={this.updateText} />
             </div>
-          )
+          );
         }
       });
       React.renderComponent(<APP cat={5} />, document.body)

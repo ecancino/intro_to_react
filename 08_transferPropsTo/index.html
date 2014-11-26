@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>transferPropsTo</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+  </head>
+  <body>
+    <script type="text/jsx">
+      /** @jsx React.DOM */
+      var APP = React.createClass({
+        render: function() {
+          return (
+            <div>
+              <BButton href="javascript:alert('hello');" className="btn-primary">I <BIcon className="glyphicon-heart" /> React</BButton>
+              <BButton href="javascript:alert('hello');" className="btn-success">I <BIcon className="glyphicon-pencil" /> React</BButton>
+              <BButton href="javascript:alert('hello');" className="btn-danger">I <BIcon className="glyphicon-inbox" /> React</BButton>
+            </div>
+          );
+        }
+      });
+
+      var BButton = React.createClass({
+        render: function() {
+          return this.transferPropsTo(
+            <a className="btn">{this.props.children}</a>
+          );
+        }
+      });
+
+      var BIcon = React.createClass({
+        render: function() {
+          return this.transferPropsTo(
+            <span className="glyphicon"></span>
+          );
+        }
+      });
+
+      React.renderComponent(<APP />, document.body);
+    </script>
+  </body>
+</html>

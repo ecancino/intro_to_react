@@ -1,0 +1,21 @@
+{
+  "name": "reactdevtools",
+  "version": "0.0.1",
+  "authors": [
+    "Joe Maddalone <joe@insert-title.com>"
+  ],
+  "description": "React Dev Tools Tutorial",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.10.0",
+    "bootstrap-css": "~3.2.0"
+  }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Integrating components with D3 and AngularJS</title>
+    <style type="text/css">
+      body { padding-top: 10px; padding-left: 10px; }
+      .bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px; /* Gets overriden by D3-assigned height below */
+        margin-right: 2px;
+        background-color: teal;
+      }
+    </style>
+  </head>
+  <body ng-app="RNG">
+    <div ng-controller="chartController">
+      <reactchart data="data" id="rchart"></reactchart>
+    </div>
+    <script src="bower_components/react/react.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <!--script src="bower_components/react/JSXTransformer.js"></script-->
+    <!--script src="bower_components/reqwest/reqwest.js"></script-->
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      angular.module('RNG', []).
+        controller('chartController', ['$http', '$scope', function chartController($http, $scope) {
+          $http.jsonp('http://filltext.com/?rows=10&val={randomNumber}&callback=JSON_CALLBACK').
+            success(function success(d) {
+              console.log(d);
+              $scope.data = d;
+            });
+        }]).
+        directive('reactChart', function reactChart() {
+          return {
+            restrict: 'E',
+            scope: {
+              data: '=',
+              id: '@'
+            },
+            link: function linkReactChart(scope, element, attrs) {
+              scope.$watch('data', function dataWatch() {
+                React.renderComponent(
+                  APP({
+                    data: scope.data,
+                    target: scope.id
+                  }),
+                  element[0]
+                )
+              });
+            }
+          };
+        });
+    </script>
+  </body>
+</html>

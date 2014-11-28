@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>React v0.12.0</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+    <script src="http://fb.me/react-0.12.0.js"></script>
+    <style>
+      .red { color: red; }
+      #message { font-style: italic; }
+    </style>
+  </head>
+  <body>
+    <script>
+      var Title = React.createClass({
+        displayName: 'Title',
+        render: function() {
+          this.props.id = 'message';
+          return React.DOM.h1(this.props, 'Hello world!');
+        }
+      });
+
+      var APP = React.createClass({
+        displayName: 'APP',
+        render: function() {
+          return React.DOM.div(null, React.createFactory(Title)({className: 'red'}));
+        }
+      });
+
+      React.render(React.createFactory(APP)(), document.body);
+    </script>
+  </body>
+</html>
